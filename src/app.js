@@ -1,40 +1,59 @@
 console.log('app running')
 
-var app = {
-    title: 'Indecision App',
-    subTitle: 'Put your life in the hands of a computer'
+// only render subtitle and p tag is subtitle exists 
+// render a new p tag - if options.length > 0 'here are your options' or 'no opttions'
 
+const app = {
+    title: 'Indecision App',
+    subTitle: 'Put your life in the hands of a computer',
+    options: ['One', 'two']
 }
 
-var template = (
+const template = (
 <div>
     <h1>{app.title}</h1>
-    <p>{app.subTitle}</p>
+    {app.subTitle && <p>{app.subTitle}</p>}
+    <p>{app.options.length > 0 ? 'Here are your options': 'No options'}</p>
+    <ol>
+        <li>Item one</li>
+        <li>Item two</li>
+    </ol>
 </div>
 )
 
-var user = {
-    name: 'Marcelo Laos',
-    age: 21,
-    location: 'Atlanta, GA'
-};
 
-function getLocation(location) {
-    if (location) {
-        return <p>Location: {location}</p>;
-    } else {
-        return undefined;
-    }
+
+let count = 0;
+const addOne = () => {
+ count++;
+ renderCounterApp();
+}
+const minusOne = () => {
+    count--;
+    renderCounterApp();
 }
 
-var templateTwo = (
-    <div>
-        <h1>{user.name || 'Anonymous'}</h1>
-        {(user.age && user.age >= 18) && <p>Age: {user.age}</p>}
-        {getLocation(user.location)}
-    </div>
-)
+const reset = () => {
+    count = 0;
+    renderCounterApp();
+}
 
-var appRoot = document.getElementById('app');
+const appRoot = document.getElementById('app');
+
+
+const renderCounterApp = () => {
+    const templateTwo = (
+        <div>
+            <h1>Count: {count}</h1>
+            <button onClick={addOne}>+1</button>
+            <button onClick={minusOne}>-1</button>
+            <button onClick={reset}>Reset</button>
+        </div>
+    
+    )
 
 ReactDOM.render(templateTwo, appRoot);
+
+}
+
+renderCounterApp();
