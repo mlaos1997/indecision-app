@@ -14,6 +14,7 @@ class Person {
     }
 }
 
+
 class Student extends Person {
     constructor(name, age, major) {
         // Refers to parent class, exactly same as calling Person constructor
